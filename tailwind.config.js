@@ -5,10 +5,20 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // You can add custom colors here if needed
+        primary: {
+          light: '#9333ea',
+          dark: '#a855f7',
+        },
+        dark: {
+          bg: '#111827',
+          card: '#1f2937',
+          text: '#f3f4f6',
+          muted: '#9ca3af',
+        }
       },
     },
   },

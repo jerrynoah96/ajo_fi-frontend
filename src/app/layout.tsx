@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,8 +17,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-white dark:bg-dark-bg transition-colors`}>
+        <ThemeProvider>
+          <ThemeSwitcher />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 } 
