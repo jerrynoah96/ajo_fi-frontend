@@ -6,6 +6,7 @@ import { PlaceholderImage } from '@/components/Placeholder';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
+import { Stats } from '@/components/Stats';
 
 export default function Home() {
   const [activeRole, setActiveRole] = useState<'contributors' | 'validators'>('contributors');
@@ -56,7 +57,18 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="flex-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-4xl md:text-6xl font-heading font-bold text-center bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+          Welcome to AjoFi
+        </h1>
+        <p className="mt-4 text-xl text-center text-white/60 font-body">
+          Decentralized thrift and credit system powered by blockchain
+        </p>
+      </div>
+      
+      <Stats />
+      
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary-light to-blue-600 dark:from-primary-dark dark:to-blue-500 text-white">
         <div className="container mx-auto px-6 py-20">
@@ -302,48 +314,6 @@ export default function Home() {
                 <div className="text-4xl mb-4">{item.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 dark:text-white">{item.title}</h3>
                 <p className="text-gray-600 dark:text-dark-muted">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-gray-50 dark:bg-dark-bg">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                number: 1000000,
-                prefix: '$',
-                suffix: '+',
-                label: 'Total Value Locked'
-              },
-              {
-                number: 1000,
-                suffix: '+',
-                label: 'Active Users'
-              },
-              {
-                number: 100,
-                suffix: '+',
-                label: 'Validators'
-              }
-            ].map((stat, index) => (
-              <motion.div 
-                key={index} 
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.5 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <AnimatedCounter 
-                  value={stat.number} 
-                  prefix={stat.prefix} 
-                  suffix={stat.suffix} 
-                />
-                <div className="text-gray-600 dark:text-dark-muted">{stat.label}</div>
               </motion.div>
             ))}
           </div>

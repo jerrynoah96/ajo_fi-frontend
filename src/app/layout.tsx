@@ -1,14 +1,26 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { ThemeSwitcher } from '@/components/ThemeSwitcher'
+import { Outfit, Quicksand } from 'next/font/google'
+import '../styles/globals.css'
+import { ClientLayout } from '@/components/ClientLayout'
 
-const inter = Inter({ subsets: ['latin'] })
+// Load Outfit for headings - a modern, friendly geometric font
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-heading',
+})
+
+// Load Quicksand for body text - rounded, friendly font
+const quicksand = Quicksand({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-body',
+})
 
 export const metadata: Metadata = {
-  title: 'AjoFi - Decentralized Thrift & Credit System',
-  description: 'Join trusted savings groups, access credit without collateral, and build your financial future with blockchain technology.',
+  title: 'AjoFi',
+  description: 'Blockchain-powered thrift and credit system',
 }
 
 export default function RootLayout({
@@ -18,11 +30,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white dark:bg-dark-bg transition-colors`}>
-        <ThemeProvider>
-          <ThemeSwitcher />
+      <body>
+        <ClientLayout outfit={outfit} quicksand={quicksand}>
           {children}
-        </ThemeProvider>
+        </ClientLayout>
       </body>
     </html>
   )
