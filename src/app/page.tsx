@@ -57,7 +57,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex-1">
+    <main className="flex-1 bg-dark-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl md:text-6xl font-heading font-bold text-center bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
           Welcome to AjoFi
@@ -126,14 +126,14 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 bg-gray-50 dark:bg-dark-bg">
+      <section id="how-it-works" className="py-20 bg-dark-bg">
         <div className="container mx-auto px-6">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16"
+            className="text-3xl md:text-4xl font-bold text-center mb-16 text-dark-text"
           >
             How It Works
           </motion.h2>
@@ -171,11 +171,11 @@ export default function Home() {
                   type: "spring",
                   stiffness: 100
                 }}
-                className="text-center p-6 bg-white dark:bg-dark-card rounded-lg shadow-lg hover:shadow-xl transition-all"
+                className="text-center p-6 bg-dark-card rounded-lg shadow-lg hover:shadow-xl transition-all"
               >
                 <div className="text-4xl mb-4">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 dark:text-white">{step.title}</h3>
-                <p className="text-gray-600 dark:text-dark-muted">{step.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-dark-text">{step.title}</h3>
+                <p className="text-dark-muted">{step.description}</p>
               </motion.div>
             ))}
           </div>
@@ -235,14 +235,14 @@ export default function Home() {
       </section>
 
       {/* Role Information Section */}
-      <section className="py-20 bg-gray-50 dark:bg-dark-bg">
+      <section className="py-20 bg-gradient-to-r from-primary-light to-blue-600 dark:from-primary-dark dark:to-blue-500">
         <div className="container mx-auto px-6">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center mb-16"
+            className="text-3xl md:text-4xl font-bold text-center mb-16 text-white"
           >
             Choose Your Role
           </motion.h2>
@@ -286,7 +286,7 @@ export default function Home() {
                       {roleDetails[role].description}
                     </p>
                     <Link
-                      href={role === 'contributors' ? '/signup' : '/validator'}
+                      href={role === 'contributors' ? '/signup' : '/become-validator'}
                       className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition"
                     >
                       {role === 'contributors' ? 'Start Saving Today' : 'Become a Validator'}
@@ -333,8 +333,10 @@ export default function Home() {
             >
               Join a Thrift Group
             </Link>
-            <Link href="/validator"
-              className="border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition inline-block mt-4 md:mt-0">
+            <Link 
+              href="/become-validator"
+              className="border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition inline-block mt-4 md:mt-0"
+            >
               Become a Validator
             </Link>
           </div>
