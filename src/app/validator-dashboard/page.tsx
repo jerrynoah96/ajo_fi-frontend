@@ -66,99 +66,101 @@ export default function ValidatorDashboard() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Validator Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-8 text-white">Validator Dashboard</h1>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <Card>
+        <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-gray-200">
               Total Staked
             </CardTitle>
-            <Shield className="h-4 w-4 text-muted-foreground" />
+            <Shield className="h-4 w-4 text-purple-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mockData.totalStaked} AJO</div>
-            <div className="text-sm text-muted-foreground">${mockData.totalStakedUSD.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-white">{mockData.totalStaked} AJO</div>
+            <div className="text-sm text-gray-400">${mockData.totalStakedUSD.toLocaleString()}</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-gray-200">
               Total Credits
             </CardTitle>
-            <Coins className="h-4 w-4 text-muted-foreground" />
+            <Coins className="h-4 w-4 text-purple-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mockData.totalCredits} AJO</div>
+            <div className="text-2xl font-bold text-white">{mockData.totalCredits} AJO</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-gray-200">
               Assigned Credits
             </CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-purple-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mockData.assignedCredits} AJO</div>
+            <div className="text-2xl font-bold text-white">{mockData.assignedCredits} AJO</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle className="text-sm font-medium text-gray-200">
               Unassigned Credits
             </CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
+            <Clock className="h-4 w-4 text-purple-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mockData.unassignedCredits} AJO</div>
+            <div className="text-2xl font-bold text-white">{mockData.unassignedCredits} AJO</div>
           </CardContent>
         </Card>
       </div>
 
       {/* Credit Assignments Table */}
-      <Card>
+      <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Credit Assignments</CardTitle>
+          <CardTitle className="text-white">Credit Assignments</CardTitle>
           <Dialog open={showAssignModal} onOpenChange={setShowAssignModal}>
             <DialogTrigger asChild>
               <Button className="bg-[#9333EA] hover:bg-[#7928CA] text-white">
                 Assign Credits
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-gray-800 border-gray-700">
               <DialogHeader>
-                <DialogTitle>Assign Credits to User</DialogTitle>
-                <DialogDescription>
+                <DialogTitle className="text-white">Assign Credits to User</DialogTitle>
+                <DialogDescription className="text-gray-400">
                   Enter the user's address, credit amount, and expected returns
                 </DialogDescription>
               </DialogHeader>
               <form onSubmit={handleAssignCredit} className="space-y-4">
                 <div>
-                  <Label htmlFor="address">User Address</Label>
+                  <Label htmlFor="address" className="text-gray-200">User Address</Label>
                   <Input
                     id="address"
                     value={newAssignment.address}
                     onChange={(e) => setNewAssignment({ ...newAssignment, address: e.target.value })}
                     placeholder="0x..."
+                    className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="amount">Credit Amount (AJO)</Label>
+                  <Label htmlFor="amount" className="text-gray-200">Credit Amount (AJO)</Label>
                   <Input
                     id="amount"
                     type="number"
                     value={newAssignment.amount}
                     onChange={(e) => setNewAssignment({ ...newAssignment, amount: e.target.value })}
                     placeholder="Amount in AJO"
+                    className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="returns">Expected Returns (%)</Label>
+                  <Label htmlFor="returns" className="text-gray-200">Expected Returns (%)</Label>
                   <Input
                     id="returns"
                     type="number"
@@ -168,6 +170,7 @@ export default function ValidatorDashboard() {
                     value={newAssignment.returns}
                     onChange={(e) => setNewAssignment({ ...newAssignment, returns: e.target.value })}
                     placeholder="e.g., 5.5"
+                    className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400"
                   />
                 </div>
                 <Button type="submit" className="w-full bg-[#9333EA] hover:bg-[#7928CA] text-white">
@@ -181,18 +184,18 @@ export default function ValidatorDashboard() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="text-left border-b">
-                  <th className="py-4 px-2">User Address</th>
-                  <th className="py-4 px-2">Amount (AJO)</th>
-                  <th className="py-4 px-2">Amount (USD)</th>
-                  <th className="py-4 px-2">Returns (%)</th>
-                  <th className="py-4 px-2">Assigned Date</th>
-                  <th className="py-4 px-2">Expected Return</th>
+                <tr className="text-left border-b border-gray-700">
+                  <th className="py-4 px-2 text-gray-300">User Address</th>
+                  <th className="py-4 px-2 text-gray-300">Amount (AJO)</th>
+                  <th className="py-4 px-2 text-gray-300">Amount (USD)</th>
+                  <th className="py-4 px-2 text-gray-300">Returns (%)</th>
+                  <th className="py-4 px-2 text-gray-300">Assigned Date</th>
+                  <th className="py-4 px-2 text-gray-300">Expected Return</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-gray-200">
                 {mockData.assignments.map((assignment, index) => (
-                  <tr key={index} className="border-b">
+                  <tr key={index} className="border-b border-gray-700">
                     <td className="py-4 px-2">{assignment.userAddress}</td>
                     <td className="py-4 px-2">{assignment.amount} AJO</td>
                     <td className="py-4 px-2">${assignment.amountUSD.toLocaleString()}</td>

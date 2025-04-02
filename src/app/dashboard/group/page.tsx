@@ -1,12 +1,29 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { UsersIcon, CurrencyDollarIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { 
+  UsersIcon, 
+  CurrencyDollarIcon, 
+  ClockIcon, 
+  ChatBubbleLeftRightIcon,
+  PaperAirplaneIcon,
+  XMarkIcon,
+  ArrowsPointingOutIcon,
+  ArrowsPointingInIcon
+} from '@heroicons/react/24/outline';
 
 // Helper function to truncate addresses
 function truncateAddress(address: string): string {
   if (!address || address.length < 10) return address;
   return `${address.substring(0, 4)}...${address.substring(address.length - 4)}`;
+}
+
+interface ChatMessage {
+  id: string;
+  sender: string;
+  message: string;
+  timestamp: Date;
 }
 
 export default function GroupDashboard() {
@@ -17,6 +34,25 @@ export default function GroupDashboard() {
   const totalMembers = searchParams.get('members') || '0';
   const joinedMembers = '1'; // Starting with the creator
   
+  // Chat state
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatExpanded, setIsChatExpanded] = useState(false);
+  const [chatMessage, setChatMessage] = useState('');
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      sender: '0x1234567890abcdef1234567890abcdef12345678',
+      message: 'Welcome to the group chat!',
+      timestamp: new Date(Date.now() - 3600000) // 1 hour ago
+    },
+    {
+      id: '2',
+      sender: '0xabcdef1234567890abcdef1234567890abcdef12',
+      message: 'Thanks for creating this group. Looking forward to our contributions.',
+      timestamp: new Date(Date.now() - 1800000) // 30 minutes ago
+    }
+  ]);
+  
   // Mock data for contribution order - in a real app, this would come from your backend
   const contributionOrder = [
     { address: '0x1234567890abcdef1234567890abcdef12345678', position: 1 },
@@ -25,8 +61,38 @@ export default function GroupDashboard() {
     // Add more as needed based on totalMembers
   ].slice(0, parseInt(totalMembers));
   
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!chatMessage.trim()) return;
+    
+    // Add new message to chat
+    const newMessage: ChatMessage = {
+      id: Date.now().toString(),
+      sender: '0x1234567890abcdef1234567890abcdef12345678', // Current user's address
+      message: chatMessage,
+      timestamp: new Date()
+    };
+    
+    setChatMessages([...chatMessages, newMessage]);
+    setChatMessage('');
+  };
+  
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+  
+  const toggleChatExpand = () => {
+    setIsChatExpanded(!isChatExpanded);
+  };
+  
+  // Format timestamp for chat messages
+  const formatMessageTime = (date: Date) => {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+  
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 relative">
       <h1 className="text-2xl font-bold text-white mb-6">Contribution Group Dashboard</h1>
       
       <div className="bg-gray-800/90 backdrop-blur-sm rounded-xl border border-gray-700 p-6 shadow-xl mb-8">
@@ -117,6 +183,91 @@ export default function GroupDashboard() {
           </table>
         </div>
       </div>
+      
+      {/* Chat toggle button */}
+      <button 
+        onClick={toggleChat}
+        className="fixed bottom-6 right-6 bg-purple-500 hover:bg-purple-600 text-white p-3 rounded-full shadow-lg transition-all z-10"
+        aria-label="Toggle chat"
+      >
+        <ChatBubbleLeftRightIcon className="h-6 w-6" />
+      </button>
+      
+      {/* Chat box */}
+      {isChatOpen && (
+        <div 
+          className={`fixed ${
+            isChatExpanded 
+              ? 'top-20 right-6 left-6 bottom-20 md:left-auto md:right-6 md:w-1/2 lg:w-1/3' 
+              : 'bottom-20 right-6 w-80 md:w-96'
+          } bg-gray-800/95 backdrop-blur-md border border-gray-700 rounded-xl shadow-2xl z-10 flex flex-col transition-all duration-300`}
+        >
+          <div className="flex items-center justify-between p-4 border-b border-gray-700">
+            <h3 className="text-white font-medium">Group Chat</h3>
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={toggleChatExpand}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label={isChatExpanded ? "Collapse chat" : "Expand chat"}
+              >
+                {isChatExpanded ? (
+                  <ArrowsPointingInIcon className="h-5 w-5" />
+                ) : (
+                  <ArrowsPointingOutIcon className="h-5 w-5" />
+                )}
+              </button>
+              <button 
+                onClick={toggleChat}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Close chat"
+              >
+                <XMarkIcon className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+          
+          {/* Chat messages */}
+          <div className={`flex-1 overflow-y-auto p-4 space-y-4 ${isChatExpanded ? '' : 'max-h-80'}`}>
+            {chatMessages.map((msg) => (
+              <div 
+                key={msg.id} 
+                className={`flex flex-col ${msg.sender === '0x1234567890abcdef1234567890abcdef12345678' ? 'items-end' : 'items-start'}`}
+              >
+                <div className="flex items-center mb-1">
+                  <span className="text-xs text-gray-400 font-mono">{truncateAddress(msg.sender)}</span>
+                  <span className="text-xs text-gray-500 ml-2">{formatMessageTime(msg.timestamp)}</span>
+                </div>
+                <div 
+                  className={`rounded-lg px-3 py-2 max-w-[80%] ${
+                    msg.sender === '0x1234567890abcdef1234567890abcdef12345678' 
+                      ? 'bg-purple-500/30 text-white' 
+                      : 'bg-gray-700/70 text-gray-200'
+                  }`}
+                >
+                  {msg.message}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Chat input */}
+          <form onSubmit={handleSendMessage} className="p-3 border-t border-gray-700 flex">
+            <input
+              type="text"
+              value={chatMessage}
+              onChange={(e) => setChatMessage(e.target.value)}
+              placeholder="Type a message..."
+              className="flex-1 bg-gray-700/50 border border-gray-600 text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+            />
+            <button
+              type="submit"
+              className="ml-2 bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-lg transition-colors"
+            >
+              <PaperAirplaneIcon className="h-5 w-5" />
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 } 
