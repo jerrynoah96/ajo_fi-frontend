@@ -2,6 +2,7 @@
 
 import { formatDistanceToNow } from 'date-fns';
 import { LockClosedIcon, LockOpenIcon, UsersIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/navigation';
 
 interface ContributionGroupCardProps {
   id: string;
@@ -14,14 +15,38 @@ interface ContributionGroupCardProps {
 }
 
 export function ContributionGroupCard({
+  id,
   timeCreated,
   contributionAmount,
   requestedUsers,
   joinedUsers,
   isLocked,
+  isMember,
 }: ContributionGroupCardProps) {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    // Navigate to the group dashboard with the group details
+    router.push(`/dashboard/group?id=${id}&amount=${contributionAmount}&duration=30&members=${requestedUsers}`);
+  };
+
+  const handleJoinClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when button is clicked
+    
+    if (isLocked) return;
+    
+    // Handle join logic here
+    console.log(`Joining group ${id}`);
+    
+    // Then navigate to dashboard
+    router.push(`/dashboard/group?id=${id}&amount=${contributionAmount}&duration=30&members=${requestedUsers}`);
+  };
+
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 p-6 hover:border-purple-500/50 transition-all">
+    <div 
+      className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700 p-6 hover:border-purple-500/50 transition-all cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="flex justify-between items-start mb-4">
         <div>
           <p className="text-gray-400 text-sm">
@@ -64,8 +89,9 @@ export function ContributionGroupCard({
               : 'bg-purple-500 hover:bg-purple-600 text-white'
           }`}
           disabled={isLocked}
+          onClick={handleJoinClick}
         >
-          {isLocked ? 'Group Full' : 'Join Group'}
+          {isLocked ? 'Group Full' : (isMember ? 'View Details' : 'Join Group')}
         </button>
       </div>
     </div>
