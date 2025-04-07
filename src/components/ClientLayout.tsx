@@ -20,6 +20,10 @@ export function ClientLayout({ children, outfit, quicksand }: ClientLayoutProps)
     setMounted(true);
   }, []);
 
+  const handleLogoClick = () => {
+    window.location.href = '/';
+  };
+
   if (!mounted) return null;
 
   return (
@@ -43,7 +47,7 @@ export function ClientLayout({ children, outfit, quicksand }: ClientLayoutProps)
       <Web3ModalProvider>
         <div className="bg-[url('/grid.svg')] bg-fixed bg-center min-h-screen w-full">
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <Navbar />
+            <Navbar onLogoClick={handleLogoClick} />
             <ThemeSwitcher />
             {children}
           </ThemeProvider>

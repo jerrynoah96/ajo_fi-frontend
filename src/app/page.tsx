@@ -42,7 +42,12 @@ const problems = [
   }
 ];
 
-export default function Home() {
+// Add a prop type for the navbar
+interface PageProps {
+  setHomeView?: (view: 'default') => void;
+}
+
+export default function Home({ setHomeView }: PageProps) {
   const [activeView, setActiveView] = useState<ViewMode>('default');
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -95,6 +100,18 @@ export default function Home() {
     })
   };
 
+  // Add this function to pass up to Navbar
+  const handleLogoClick = () => {
+    setActiveView('default');
+  };
+
+  useEffect(() => {
+    // Make this function available to parent components
+    if (setHomeView) {
+      setHomeView(() => handleLogoClick);
+    }
+  }, [setHomeView]);
+
   return (
     <div className="min-h-screen bg-[#0A0B0D] relative overflow-hidden">
       {/* Dynamic Background */}
@@ -109,6 +126,14 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10">
         <div className="container mx-auto px-4">
+          {/* Add AjoFi text with better positioning and interaction */}
+          <button
+            onClick={() => setActiveView('default')}
+            className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400 cursor-pointer mt-6 hover:scale-105 transition-transform"
+          >
+            AjoFi
+          </button>
+
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center mt-10">
             <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-teal-400 mb-6">
               Decentralized
@@ -541,7 +566,7 @@ export default function Home() {
           </AnimatePresence>
         </div>
       </div>
-      <Footer />
+      <Footer onLogoClick={handleLogoClick} />
     </div>
   );
 } 

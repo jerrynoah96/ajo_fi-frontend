@@ -22,7 +22,12 @@ const DiscordIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export function Footer() {
+// Add onLogoClick prop to Footer component
+interface FooterProps {
+  onLogoClick?: () => void;
+}
+
+export function Footer({ onLogoClick }: FooterProps) {
   return (
     <footer className="bg-gray-900 border-t border-gray-800 py-12 mt-20 relative z-10">
       <div className="container mx-auto px-4">
@@ -30,12 +35,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <Link 
-              href="/" 
-              className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400"
+            <button  // Changed from Link to button
+              onClick={onLogoClick}
+              className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400 cursor-pointer"
             >
               AjoFi
-            </Link>
+            </button>
             <p className="text-gray-100 text-lg">
               Decentralized savings groups for everyone. Secure, transparent, and community-driven.
             </p>
