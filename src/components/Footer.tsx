@@ -45,28 +45,21 @@ export function Footer({ onLogoClick }: FooterProps) {
               Decentralized savings groups for everyone. Secure, transparent, and community-driven.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://X.com/ajofi" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <button 
                 className="text-gray-100 hover:text-purple-400 transition-colors"
               >
                 <Icons.X size={20} />
-              </a>
-              <a 
-                href="https://discord.gg/ajofi" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              </button>
+              <button 
+                className="text-gray-100 hover:text-purple-400 transition-colors"
               >
                 <DiscordIcon size={20} />
-              </a>
-              <a 
-                href="https://github.com/ajofi" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              </button>
+              <button 
+                className="text-gray-100 hover:text-purple-400 transition-colors"
               >
                 <Icons.Github size={20} />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -75,31 +68,22 @@ export function Footer({ onLogoClick }: FooterProps) {
             <h3 className="text-white font-semibold mb-4">Product</h3>
             <ul className="space-y-2">
               <li>
-                <Link 
-                  href="/groups" 
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.Users size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Savings Groups</span>
-                </Link>
+                </button>
               </li>
               <li>
-                <Link 
-                  href="/become-validator" 
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.Shield size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Become a Validator</span>
-                </Link>
+                </button>
               </li>
               <li>
-                <Link 
-                  href="/roadmap" 
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.FileText size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Roadmap</span>
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -120,24 +104,16 @@ export function Footer({ onLogoClick }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a 
-                  href="https://docs.ajofi.com" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.Book size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Documentation</span>
-                </a>
+                </button>
               </li>
               <li>
-                <Link 
-                  href="/faq" 
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.HelpCircle size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>FAQ</span>
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -147,37 +123,22 @@ export function Footer({ onLogoClick }: FooterProps) {
             <h3 className="text-white font-semibold mb-4">Community</h3>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="https://forum.ajofi.com" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.MessageSquare size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Forum</span>
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="https://discord.gg/ajofi" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <DiscordIcon size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Discord</span>
-                </a>
+                </button>
               </li>
               <li>
-                <a 
-                  href="https://X.com/ajofi" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
-                >
+                <button className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors">
                   <Icons.X size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>X</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -190,18 +151,16 @@ export function Footer({ onLogoClick }: FooterProps) {
               © {new Date().getFullYear()} AjoFi. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link 
-                href="/privacy" 
+              <button  // Changed from Link
                 className="text-gray-100 hover:text-purple-400 transition-colors"
               >
                 Privacy Policy
-              </Link>
-              <Link 
-                href="/terms" 
+              </button>
+              <button  // Changed from Link
                 className="text-gray-100 hover:text-purple-400 transition-colors"
               >
                 Terms of Service
-              </Link>
+              </button>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useState, useRef, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { truncateAddress } from '@/utils/truncateAddress';
+import { ComingSoonModal } from '@/components/ComingSoonModal';
 
 interface NavbarProps {
   onLogoClick?: () => void;
@@ -14,6 +15,7 @@ export function Navbar({ onLogoClick }: NavbarProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { address, disconnect } = useAccount();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -76,7 +78,7 @@ export function Navbar({ onLogoClick }: NavbarProps) {
                       if (!connected) {
                         return (
                           <button
-                            onClick={openConnectModal}
+                            onClick={() => setIsModalOpen(true)}
                             className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors"
                           >
                             Connect Wallet
@@ -161,6 +163,10 @@ export function Navbar({ onLogoClick }: NavbarProps) {
           </div>
         </div>
       </div>
+      <ComingSoonModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </nav>
   );
 } 

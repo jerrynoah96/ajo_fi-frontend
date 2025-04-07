@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { Footer } from '@/components/Footer';
+import { ComingSoonModal } from '@/components/ComingSoonModal';
 
 type ViewMode = 'default' | 'validator' | 'contributor';
 
@@ -52,6 +53,7 @@ export default function Home({ setHomeView }: PageProps) {
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [imageError, setImageError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (activeView !== 'default') return;
@@ -135,12 +137,12 @@ export default function Home({ setHomeView }: PageProps) {
           </button>
 
           <div className="flex flex-col items-center justify-center min-h-[60vh] text-center mt-10">
-            <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-teal-400 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-teal-400 mb-6">
               Decentralized
               <br />
               Savings Groups
             </h1>
-            <p className="text-gray-300 text-xl max-w-2xl mb-8">
+            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mb-8">
               Join trusted savings groups or create your own. Secure, transparent, and community-driven.
             </p>
           </div>
@@ -378,6 +380,10 @@ export default function Home({ setHomeView }: PageProps) {
                     </div>
                   </div>
                   <Link 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsModalOpen(true);
+                    }}
                     href="/groups"
                     className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
                   >
@@ -497,6 +503,10 @@ export default function Home({ setHomeView }: PageProps) {
                     </div>
                   </div>
                   <Link 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsModalOpen(true);
+                    }}
                     href="/become-validator"
                     className="inline-flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
                   >
@@ -567,6 +577,10 @@ export default function Home({ setHomeView }: PageProps) {
         </div>
       </div>
       <Footer onLogoClick={handleLogoClick} />
+      <ComingSoonModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 } 
