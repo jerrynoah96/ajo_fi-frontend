@@ -576,6 +576,44 @@ export default function Home({ setHomeView }: PageProps) {
           </AnimatePresence>
         </div>
       </div>
+      {/* Supported By Section */}
+      <div className="w-full bg-gray-900/50 backdrop-blur-sm border-y border-gray-800 py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center justify-center">
+            <h3 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400 mb-8">
+              Supported By
+            </h3>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+              <a 
+                href="https://x.com/Web3Bridge" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="relative w-40 h-16 md:w-64 md:h-24 transition-transform hover:scale-105"
+              >
+                <Image
+                  src="/web3bridge-logo.png"
+                  alt="Web3Bridge"
+                  fill
+                  className="object-contain brightness-200"
+                />
+              </a>
+              <a 
+                href="https://x.com/encodeclub" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="relative w-40 h-16 md:w-64 md:h-24 transition-transform hover:scale-105"
+              >
+                <Image
+                  src="/encode-logo.png"
+                  alt="Encode - Winners of HackAfrica 2022"
+                  fill
+                  className="object-contain brightness-200"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer onLogoClick={handleLogoClick} />
       <ComingSoonModal 
         isOpen={isModalOpen} 
