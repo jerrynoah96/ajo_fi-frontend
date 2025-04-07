@@ -1,4 +1,12 @@
 'use client';
-// Copy your dashboard page code here, but add 'use client' at the top
+
 import { motion } from 'framer-motion';
+
+export default function DashboardPage() {
+  return (
+    <div>
+      {/* Your dashboard content */}
+    </div>
+  )
+}
 // ... rest of your dashboard page code ... 

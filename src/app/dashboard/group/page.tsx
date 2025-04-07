@@ -29,9 +29,10 @@ interface ChatMessage {
 export default function GroupDashboard() {
   const searchParams = useSearchParams();
   
-  const amount = searchParams.get('amount') || '0';
-  const duration = searchParams.get('duration') || '0';
-  const totalMembers = searchParams.get('members') || '0';
+  // Add null checks and provide default values
+  const amount = searchParams?.get('amount') ?? '0';
+  const duration = searchParams?.get('duration') ?? '0';
+  const totalMembers = searchParams?.get('members') ?? '0';
   const joinedMembers = '1'; // Starting with the creator
   
   // Chat state

@@ -6,14 +6,25 @@ import { Navbar } from '@/components/Navbar'
 import { Web3ModalProvider } from '@/components/Web3ModalProvider'
 import { useState, useEffect } from 'react'
 import { NextFont } from 'next/dist/compiled/@next/font'
+import { Outfit, Quicksand } from 'next/font/google'
+
+const outfit = Outfit({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-outfit',
+});
+
+const quicksand = Quicksand({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-quicksand',
+});
 
 interface ClientLayoutProps {
   children: React.ReactNode;
-  outfit: NextFont;
-  quicksand: NextFont;
 }
 
-export function ClientLayout({ children, outfit, quicksand }: ClientLayoutProps) {
+export function ClientLayout({ children }: ClientLayoutProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,8 +40,8 @@ export function ClientLayout({ children, outfit, quicksand }: ClientLayoutProps)
   return (
     <div 
       className={`
-        ${outfit.variable} 
-        ${quicksand.variable} 
+        ${outfit.className}
+        ${quicksand.className}
         font-body 
         min-h-screen
         w-full

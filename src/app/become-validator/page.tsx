@@ -36,7 +36,7 @@ export default function BecomeValidatorPage() {
 
   const handleSuccessClose = () => {
     setShowSuccessModal(false);
-    router.push('/validator-dashboard');
+    router.push('/validator&apos;s dashboard');
   };
 
   return (

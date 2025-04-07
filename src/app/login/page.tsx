@@ -1,4 +1,11 @@
 'use client';
-// Copy your login page code here, but add 'use client' at the top
-import { useState } from 'react';
-// ... rest of your login page code ... 
+
+import { motion } from 'framer-motion';
+
+export default function LoginPage() {
+  return (
+    <div>
+      {/* Your login page content */}
+    </div>
+  );
+} 

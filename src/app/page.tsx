@@ -43,12 +43,7 @@ const problems = [
   }
 ];
 
-// Add a prop type for the navbar
-interface PageProps {
-  setHomeView?: (view: 'default') => void;
-}
-
-export default function Home({ setHomeView }: PageProps) {
+export default function Home() {
   const [activeView, setActiveView] = useState<ViewMode>('default');
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -102,17 +97,9 @@ export default function Home({ setHomeView }: PageProps) {
     })
   };
 
-  // Add this function to pass up to Navbar
   const handleLogoClick = () => {
     setActiveView('default');
   };
-
-  useEffect(() => {
-    // Make this function available to parent components
-    if (setHomeView) {
-      setHomeView(() => handleLogoClick);
-    }
-  }, [setHomeView]);
 
   return (
     <div className="min-h-screen bg-[#0A0B0D] relative overflow-hidden">
@@ -375,7 +362,7 @@ export default function Home({ setHomeView }: PageProps) {
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold text-white mb-2">Contribute & Collect</h3>
-                        <p className="text-gray-300">Make regular contributions and receive your share when it's your turn.</p>
+                        <p className="text-gray-300">Make regular contributions and receive your share when it&apos;s your turn.</p>
                       </div>
                     </div>
                   </div>
