@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { Footer } from '@/components/Footer';
 
 type ViewMode = 'default' | 'validator' | 'contributor';
 
@@ -107,28 +108,17 @@ export default function Home() {
 
       {/* Content */}
       <div className="relative z-10">
-        <div className="container mx-auto px-4 py-16">
-          {/* Hero Section */}
-          <motion.div 
-            className="text-center mb-24"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="inline-block">
-              <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400 mb-6">
-                Decentralized
-                <br />
-                Savings Groups
-              </h1>
-            </div>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Join trusted savings groups or create your own. 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400">
-                {" "}Secure, transparent, and community-driven.
-              </span>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center mt-10">
+            <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-teal-400 mb-6">
+              Decentralized
+              <br />
+              Savings Groups
+            </h1>
+            <p className="text-gray-300 text-xl max-w-2xl mb-8">
+              Join trusted savings groups or create your own. Secure, transparent, and community-driven.
             </p>
-          </motion.div>
+          </div>
 
           {/* Problems Section */}
           {activeView === 'default' && (
@@ -348,6 +338,15 @@ export default function Home() {
                         <span className="text-purple-400">3</span>
                       </div>
                       <div>
+                        <h3 className="text-xl font-semibold text-white mb-2">Stake or Request Credit</h3>
+                        <p className="text-gray-300">Stake collateral or request credit points from validators to participate.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                        <span className="text-purple-400">4</span>
+                      </div>
+                      <div>
                         <h3 className="text-xl font-semibold text-white mb-2">Contribute & Collect</h3>
                         <p className="text-gray-300">Make regular contributions and receive your share when it's your turn.</p>
                       </div>
@@ -457,7 +456,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold text-white mb-2">Apply as Validator</h3>
-                        <p className="text-gray-300">Submit your application to become a trusted validator.</p>
+                        <p className="text-gray-300">Submit your application and get verified to become a trusted validator.</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -465,8 +464,8 @@ export default function Home() {
                         <span className="text-purple-400">2</span>
                       </div>
                       <div>
-                        <h3 className="text-xl font-semibold text-white mb-2">Verify Groups</h3>
-                        <p className="text-gray-300">Review and validate group creation requests.</p>
+                        <h3 className="text-xl font-semibold text-white mb-2">Stake & Get Credit Points</h3>
+                        <p className="text-gray-300">Deposit collateral to receive credit points that you can assign to users.</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -474,8 +473,19 @@ export default function Home() {
                         <span className="text-purple-400">3</span>
                       </div>
                       <div>
+                        <h3 className="text-xl font-semibold text-white mb-2">Assign Credit Points</h3>
+                        <p className="text-gray-300">Review user requests and assign credit points based on your requirements and risk assessment.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                        <span className="text-purple-400">4</span>
+                      </div>
+                      <div>
                         <h3 className="text-xl font-semibold text-white mb-2">Earn Rewards</h3>
-                        <p className="text-gray-300">Receive rewards for maintaining the integrity of the platform.</p>
+                        <p className="text-gray-300">
+                          Receive rewards from successful credit assignments, earn passive yields on your stake, and get platform contribution bonuses.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -567,6 +577,7 @@ export default function Home() {
           </AnimatePresence>
         </div>
       </div>
+      <Footer />
     </div>
   );
 } 

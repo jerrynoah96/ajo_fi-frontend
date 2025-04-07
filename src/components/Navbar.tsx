@@ -36,10 +36,13 @@ export function Navbar() {
   };
 
   return (
-    <nav className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
-      <div className="w-full px-6 md:px-8 lg:px-12">
-        <div className="flex justify-between h-16 items-center">
-          <Link href="/" className="text-xl font-bold text-purple-400">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link 
+            href="/" 
+            className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-teal-400"
+          >
             AjoFi
           </Link>
 
