@@ -365,37 +365,19 @@ export default function Home() {
                   
                   <div className="relative">
                     {!imageError ? (
-                      <>
-                        {/* Desktop Image */}
-                        <Image
-                          src="/group-dashboard.png"
-                          alt="Contribution Group Dashboard"
-                          width={1200}
-                          height={800}
-                          priority
-                          onError={() => setImageError(true)}
-                          className="rounded-lg shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] hidden md:block"
-                          style={{
-                            filter: 'brightness(1.1) contrast(1.1)',
-                            WebkitBackdropFilter: 'blur(4px)',
-                          }}
-                        />
-                        
-                        {/* Mobile Image */}
-                        <Image
-                          src="/group-dashboard-mobile.png"
-                          alt="Contribution Group Dashboard"
-                          width={800}
-                          height={1200}
-                          priority
-                          onError={() => setImageError(true)}
-                          className="rounded-lg shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] block md:hidden"
-                          style={{
-                            filter: 'brightness(1.1) contrast(1.1)',
-                            WebkitBackdropFilter: 'blur(4px)',
-                          }}
-                        />
-                      </>
+                      <Image
+                        src="/validator-dashboard.png"
+                        alt="Validator Dashboard"
+                        width={1200}
+                        height={800}
+                        priority
+                        onError={() => setImageError(true)}
+                        className="rounded-lg shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"
+                        style={{
+                          filter: 'brightness(1.1) contrast(1.1)',
+                          WebkitBackdropFilter: 'blur(4px)',
+                        }}
+                      />
                     ) : (
                       <div className="aspect-[16/10] bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
                         <p className="text-gray-500">Failed to load dashboard preview</p>
@@ -407,13 +389,13 @@ export default function Home() {
                     
                     {/* Feature highlights - Desktop version */}
                     <div className="absolute -right-4 top-4 bg-purple-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-medium transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 md:block hidden">
-                      Real-time Progress Tracking
+                      Real-time Credit Management
                     </div>
                     <div className="absolute -right-4 top-20 bg-teal-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-medium transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 delay-100 md:block hidden">
-                      Group Chat Integration
+                      Stake & Earn Rewards
                     </div>
                     <div className="absolute -right-4 top-36 bg-blue-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-medium transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 delay-200 md:block hidden">
-                      Transparent Order System
+                      Track Credit Assignments
                     </div>
 
                     {/* Feature highlights - Mobile version */}
@@ -421,15 +403,15 @@ export default function Home() {
                       <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 space-y-2">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-purple-500" />
-                          <p className="text-sm text-white">Real-time Progress Tracking</p>
+                          <p className="text-sm text-white">Real-time Credit Management</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-teal-500" />
-                          <p className="text-sm text-white">Group Chat Integration</p>
+                          <p className="text-sm text-white">Stake & Earn Rewards</p>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 rounded-full bg-blue-500" />
-                          <p className="text-sm text-white">Transparent Order System</p>
+                          <p className="text-sm text-white">Track Credit Assignments</p>
                         </div>
                       </div>
                     </div>
@@ -502,37 +484,19 @@ export default function Home() {
                   
                   <div className="relative">
                     {!imageError ? (
-                      <>
-                        {/* Desktop Image */}
-                        <Image
-                          src="/validator-dashboard.png"
-                          alt="Validator Dashboard"
-                          width={1200}
-                          height={800}
-                          priority
-                          onError={() => setImageError(true)}
-                          className="rounded-lg shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] hidden md:block"
-                          style={{
-                            filter: 'brightness(1.1) contrast(1.1)',
-                            WebkitBackdropFilter: 'blur(4px)',
-                          }}
-                        />
-                        
-                        {/* Mobile Image */}
-                        <Image
-                          src="/validator-dashboard-mobile.png"
-                          alt="Validator Dashboard Mobile"
-                          width={800}
-                          height={1200}
-                          priority
-                          onError={() => setImageError(true)}
-                          className="rounded-lg shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] block md:hidden"
-                          style={{
-                            filter: 'brightness(1.1) contrast(1.1)',
-                            WebkitBackdropFilter: 'blur(4px)',
-                          }}
-                        />
-                      </>
+                      <Image
+                        src="/validator-dashboard.png"
+                        alt="Validator Dashboard"
+                        width={1200}
+                        height={800}
+                        priority
+                        onError={() => setImageError(true)}
+                        className="rounded-lg shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"
+                        style={{
+                          filter: 'brightness(1.1) contrast(1.1)',
+                          WebkitBackdropFilter: 'blur(4px)',
+                        }}
+                      />
                     ) : (
                       <div className="aspect-[16/10] bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
                         <p className="text-gray-500">Failed to load dashboard preview</p>
