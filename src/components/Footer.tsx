@@ -41,12 +41,12 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://twitter.com/ajofi" 
+                href="https://X.com/ajofi" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-100 hover:text-purple-400 transition-colors"
               >
-                <Icons.Twitter size={20} />
+                <Icons.X size={20} />
               </a>
               <a 
                 href="https://discord.gg/ajofi" 
@@ -105,9 +105,10 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="/whitepaper.pdf" 
+                  href="https://docs.google.com/document/d/1GipSwKsjBNQ9XlxN3VDhYNrxm68-HSl46oQRKc7cX4U/edit?usp=sharing"
                   target="_blank"
-                  className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 text-white hover:text-purple-400 transition-colors"
                 >
                   <Icons.FileText size={16} className="group-hover:text-purple-400 transition-colors" />
                   <span>Whitepaper</span>
@@ -164,13 +165,13 @@ export function Footer() {
               </li>
               <li>
                 <a 
-                  href="https://twitter.com/ajofi" 
+                  href="https://X.com/ajofi" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 text-gray-100 hover:text-purple-400 transition-colors"
                 >
-                  <Icons.Twitter size={16} className="group-hover:text-purple-400 transition-colors" />
-                  <span>Twitter</span>
+                  <Icons.X size={16} className="group-hover:text-purple-400 transition-colors" />
+                  <span>X</span>
                 </a>
               </li>
             </ul>
