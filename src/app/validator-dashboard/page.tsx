@@ -13,7 +13,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAccount } from "wagmi";
+import { useValidatorFactory } from "@/hooks/contracts/useValidatorFactory";
+import { useRouter } from "next/navigation";
 
 interface CreditAssignment {
   userAddress: string;
@@ -25,12 +28,31 @@ interface CreditAssignment {
 }
 
 export default function ValidatorDashboard() {
+  const { address } = useAccount();
+  const { isValidator } = useValidatorFactory();
+  const router = useRouter();
   const [showAssignModal, setShowAssignModal] = useState(false);
   const [newAssignment, setNewAssignment] = useState({
     address: '',
     amount: '',
     returns: '',
   });
+
+  useEffect(() => {
+    const checkAccess = async () => {
+      if (!address) {
+        router.push('/');
+        return;
+      }
+
+      const isValidatorStatus = await isValidator(address);
+      if (!isValidatorStatus) {
+        router.push('/become-validator');
+      }
+    };
+
+    checkAccess();
+  }, [address, isValidator, router]);
 
   // Mock data
   const mockData = {

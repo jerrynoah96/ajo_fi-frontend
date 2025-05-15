@@ -5,13 +5,33 @@ import {
   getDefaultWallets,
 } from '@rainbow-me/rainbowkit';
 import { createClient, WagmiConfig, configureChains } from 'wagmi';
-import { mainnet, arbitrum, sepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { CHAIN_ID } from '@/contracts/addresses';
 import '@rainbow-me/rainbowkit/styles.css';
 
-// Configure chains & providers
+// Define Base Sepolia chain
+const baseSepolia = {
+  id: CHAIN_ID,
+  name: 'Base Sepolia',
+  network: 'base-sepolia',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Ethereum',
+    symbol: 'ETH',
+  },
+  rpcUrls: {
+    public: { http: ['https://sepolia.base.org'] },
+    default: { http: ['https://sepolia.base.org'] },
+  },
+  blockExplorers: {
+    default: { name: 'BaseScan', url: 'https://sepolia.basescan.org' },
+  },
+  testnet: true,
+} as const;
+
+// Configure chains & providers with only Base Sepolia
 const { chains, provider } = configureChains(
-  [mainnet, arbitrum, sepolia],
+  [baseSepolia], // Only Base Sepolia
   [publicProvider()]
 );
 
@@ -34,6 +54,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider 
         chains={chains} 
+        initialChain={CHAIN_ID} // Force initial chain to Base Sepolia
         modalSize="compact"
         modalProps={{
           overlayProps: {

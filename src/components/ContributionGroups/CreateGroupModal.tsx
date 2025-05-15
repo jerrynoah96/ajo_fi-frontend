@@ -8,9 +8,18 @@ import { useRouter } from 'next/navigation';
 interface CreateGroupModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmit: (data: {
+    contributionAmount: number;
+    maxMembers: number;
+    roundInterval: number;
+    tokenAddress: string;
+    position: number;
+    maxDelayTime: number;
+    validator: string;
+  }) => Promise<void>;
 }
 
-export function CreateGroupModal({ isOpen, onClose }: CreateGroupModalProps) {
+export function CreateGroupModal({ isOpen, onClose, onSubmit }: CreateGroupModalProps) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     contributionAmount: '',

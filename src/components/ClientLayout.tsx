@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar'
 import { Web3ModalProvider } from '@/components/Web3ModalProvider'
 import { useState, useEffect } from 'react'
 import { NextFont } from 'next/dist/compiled/@next/font'
+import { NetworkCheck } from './NetworkCheck'
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -27,28 +28,13 @@ export function ClientLayout({ children, outfit, quicksand }: ClientLayoutProps)
   if (!mounted) return null;
 
   return (
-    <div 
-      className={`
-        ${outfit.variable} 
-        ${quicksand.variable} 
-        font-body 
-        min-h-screen
-        w-full
-        bg-gradient-to-br 
-        from-purple-900/95 
-        to-indigo-900/95 
-        dark:from-gray-900/95 
-        dark:to-slate-900/95 
-        text-white
-        backdrop-blur-sm
-        fixed-when-modal
-      `}
-    >
+    <div className={`${outfit.variable} ${quicksand.variable} font-body min-h-screen w-full bg-gradient-to-br from-purple-900/95 to-indigo-900/95 dark:from-gray-900/95 dark:to-slate-900/95 text-white backdrop-blur-sm fixed-when-modal`}>
       <Web3ModalProvider>
         <div className="bg-[url('/grid.svg')] bg-fixed bg-center min-h-screen w-full">
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <Navbar onLogoClick={handleLogoClick} />
             <ThemeSwitcher />
+            <NetworkCheck />
             {children}
           </ThemeProvider>
         </div>
