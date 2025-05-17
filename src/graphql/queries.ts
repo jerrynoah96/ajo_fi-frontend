@@ -19,4 +19,38 @@ export const GET_VALIDATOR_DATA = gql`
       }
     }
   }
+`;
+
+export const GET_USER_VALIDATOR = gql`
+  query GetUserValidator($userId: String!) {
+    user(id: $userId) {
+      validatorAssignments {
+        validator {
+          owner
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_PURSES = gql`
+  query GetAllPurses {
+    purses {
+      id
+      owner
+      contributionAmount
+      maxMembers
+      roundInterval
+      position
+      maxDelayTime
+      validator {
+        id
+        owner
+      }
+      members {
+        id
+        position
+      }
+    }
+  }
 `; 

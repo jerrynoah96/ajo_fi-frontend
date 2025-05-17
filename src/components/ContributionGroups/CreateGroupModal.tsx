@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon, CurrencyDollarIcon, ClockIcon, UsersIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
+import { CONTRACT_ADDRESSES } from '@/contracts/addresses';
+import { useAccount } from 'wagmi';
+import { useValidatorData } from '@/hooks/useValidatorData';
+import { useContractEvent } from '@/hooks/contracts/useContractEvent';
+import { PurseFactoryABI } from '@/contracts/abis';
 
 interface CreateGroupModalProps {
   isOpen: boolean;
@@ -21,28 +26,61 @@ interface CreateGroupModalProps {
 
 export function CreateGroupModal({ isOpen, onClose, onSubmit }: CreateGroupModalProps) {
   const router = useRouter();
+  const { address } = useAccount();
+  const { data: validatorData } = useValidatorData(address);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const [formData, setFormData] = useState({
     contributionAmount: '',
     duration: '',
-    totalMembers: ''
+    totalMembers: '',
+    position: '1' // Default position
   });
-  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Listen for PurseCreated event using our custom hook
+  useContractEvent(
+    CONTRACT_ADDRESSES.PURSE_FACTORY,
+    PurseFactoryABI,
+    'PurseCreated',
+    (purse, creator) => {
+      console.log('PurseCreated event:', { purse, creator, currentAddress: address });
+      if (creator.toLowerCase() === address?.toLowerCase()) {
+        setIsSubmitting(false);
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+          onClose();
+          // Route to the group page using the purse address
+          router.push(`/dashboard/group/${purse}`);
+        }, 2000);
+      }
+    }
+  );
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    setIsSubmitting(true);
     
-    // Show success modal instead of closing immediately
-    setShowSuccess(true);
-    
-    // Redirect to dashboard after a short delay
-    setTimeout(() => {
-      setShowSuccess(false);
-      onClose();
-      // Navigate to the dashboard with the group details
-      router.push(`/dashboard/group?amount=${formData.contributionAmount}&duration=${formData.duration}&members=${formData.totalMembers}`);
-    }, 2000);
+    const validatorAddress = validatorData?.id || '';
+    const roundIntervalInSeconds = Number(formData.duration) * 24 * 60 * 60;
+    const maxDelayTime = 86400;
+
+    try {
+      await onSubmit({
+        contributionAmount: Number(formData.contributionAmount),
+        maxMembers: Number(formData.totalMembers),
+        roundInterval: roundIntervalInSeconds,
+        tokenAddress: CONTRACT_ADDRESSES.TOKEN,
+        position: Number(formData.position),
+        maxDelayTime,
+        validator: validatorAddress
+      });
+      // Don't show success yet - wait for event
+    } catch (error) {
+      console.error('Failed to submit transaction:', error);
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -146,11 +184,30 @@ export function CreateGroupModal({ isOpen, onClose, onSubmit }: CreateGroupModal
                       </div>
                     </div>
 
+                    <div>
+                      <label className="block text-gray-300 text-sm font-medium mb-2">
+                        Position in Group
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={formData.position}
+                          onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                          className="bg-gray-700/50 border border-gray-600 text-white rounded-lg block w-full p-2.5 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                          placeholder="Enter your position (1-N)"
+                          required
+                          min="1"
+                          max={formData.totalMembers}
+                        />
+                      </div>
+                    </div>
+
                     <button
                       type="submit"
-                      className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg font-medium transition-colors mt-6"
+                      disabled={isSubmitting}
+                      className="w-full bg-purple-500 hover:bg-purple-600 disabled:bg-purple-400 text-white py-2 px-4 rounded-lg font-medium transition-colors mt-6"
                     >
-                      Create Group
+                      {isSubmitting ? 'Creating Group...' : 'Create Group'}
                     </button>
                   </form>
                 </div>
