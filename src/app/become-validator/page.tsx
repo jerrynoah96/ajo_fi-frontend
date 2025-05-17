@@ -24,13 +24,15 @@ import { useNetwork } from '@/hooks/useNetwork';
 import { useAccount } from 'wagmi';
 import { TokenABI } from '@/contracts/abis';
 
+type TxState = 'idle' | 'approving' | 'waiting_approval' | 'creating' | 'waiting_creation' | 'success';
+
 export default function BecomeValidatorPage() {
   const router = useRouter();
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [txState, setTxState] = useState<'idle' | 'approving' | 'waiting_approval' | 'creating' | 'waiting_creation' | 'success'>('idle');
+  const [txState, setTxState] = useState<TxState>('idle');
   const [isApprovalConfirmed, setIsApprovalConfirmed] = useState(false);
   const [approvalTxHash, setApprovalTxHash] = useState<string | null>(null);
   const [isApproved, setIsApproved] = useState(false);
@@ -241,6 +243,16 @@ export default function BecomeValidatorPage() {
   // Disable form submission button if not on correct network
   const isSubmitDisabled = isLoading || !isConnected || !isCorrectNetwork;
 
+  // Update the button text logic
+  const getButtonText = () => {
+    if (!isConnected) return 'Connect Wallet';
+    if (!isCorrectNetwork) return 'Switch Network';
+    if (isLoading) {
+      return txState === 'creating' ? 'Creating Validator...' : 'Approving...';
+    }
+    return isApproved ? 'Create Validator' : 'Approve Tokens';
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen pt-20">
       <h1 className="text-4xl font-bold text-center mb-12">Become an AJO-FI Validator</h1>
@@ -393,10 +405,7 @@ export default function BecomeValidatorPage() {
                 className="w-full bg-[#9333EA] hover:bg-[#7928CA] text-white"
                 disabled={isSubmitDisabled}
               >
-                {!isConnected ? 'Connect Wallet' : 
-                 !isCorrectNetwork ? 'Switch Network' :
-                 isLoading ? (txState === 'creating' ? 'Creating Validator...' : 'Approving...') :
-                 isApproved ? 'Create Validator' : 'Approve Tokens'}
+                {getButtonText()}
               </Button>
             </form>
           )}

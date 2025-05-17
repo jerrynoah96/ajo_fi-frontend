@@ -35,22 +35,20 @@ export const GET_USER_VALIDATOR = gql`
 
 export const GET_ALL_PURSES = gql`
   query GetAllPurses {
-    purses {
+    purses(first: 10) {
       id
-      owner
-      contributionAmount
-      maxMembers
-      roundInterval
-      position
-      maxDelayTime
-      validator {
-        id
-        owner
-      }
       members {
+        member {
+          id
+          validatorAssignments {
+            amountAssigned
+          }
+        }
         id
-        position
+        totalContributed
       }
+      roundInterval
+      totalPayoutsMade
     }
   }
 `; 
